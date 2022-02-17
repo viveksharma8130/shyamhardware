@@ -2,7 +2,6 @@ import * as moment from 'moment-timezone';
 import * as Bcrypt from 'bcrypt';
 import * as multer from "multer";
 
-import admin from "./firebase/firebaseConfig";
 import excelToJson = require("convert-excel-to-json");
 import * as fs from 'fs';
 
@@ -44,16 +43,7 @@ export class Utils{
         return moment.tz(Date.now(), "Asia/Kolkata").add(5, 'hours').add(30, 'minute');//.format('YYYY-MM-DD hh:mm:ss')
     }
 
-    // push notification
-    static async pushNotification(registrationToken, message_notification){
-        await admin.messaging().sendToDevice(registrationToken, message_notification, notification_options).then( response => {
-           // console.log("RES: "+response);
-            return response;
-        }).catch( error => {
-           // console.log("ERR: "+error);
-            return error;
-        });
-    }
+    
 
     // IMPORT EXCEL TO MONGODB
     static async importExcelData2MongoDB(filePath){
